@@ -196,29 +196,29 @@ if uploaded_file is not None:
             1: 'positive'
         })
     
-    # Display sentiment distribution
-    st.write("### Sentiment Distribution")
-    sentiment_counts = df['sentiment_category'].value_counts()
-    st.bar_chart(sentiment_counts)
-    
-    # Remove empty rows if selected
-    if remove_empty_rows:
-        df = df[df[working_column].notna()]
-    
-    # Display processed data
-    st.write("### Processed Data Preview")
-    display_columns = [working_column]
-    if analyze_sentiment:
-        display_columns.extend(['sentiment', 'sentiment_category'])
-    st.write(df[display_columns].head(10))
-    # Add download button for processed data
-    csv = df.to_csv(index=False)
-    st.download_button(
-        label="Download processed data as CSV",
-        data=csv,
-        file_name="processed_data.csv",
-        mime="text/csv"
-    )
+        # Display sentiment distribution
+        st.write("### Sentiment Distribution")
+        sentiment_counts = df['sentiment_category'].value_counts()
+        st.bar_chart(sentiment_counts)
+        
+        # Remove empty rows if selected
+        if remove_empty_rows:
+            df = df[df[working_column].notna()]
+        
+        # Display processed data
+        st.write("### Processed Data Preview")
+        display_columns = [working_column]
+        if analyze_sentiment:
+            display_columns.extend(['sentiment', 'sentiment_category'])
+        st.write(df[display_columns].head(10))
+        # Add download button for processed data
+        csv = df.to_csv(index=False)
+        st.download_button(
+            label="Download processed data as CSV",
+            data=csv,
+            file_name="processed_data.csv",
+            mime="text/csv"
+        )
     
 
 else:
