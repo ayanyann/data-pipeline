@@ -144,7 +144,7 @@ def label_disaster_sentiment(text):
     else:
         return 0
 
-st.title("Disaster Data Processor Pipeline")
+st.title("Disaster Data Processor Pipeline 🚀")
 
 # File uploader widget
 uploaded_file = st.file_uploader("Upload your CSV file", type=["csv"])
