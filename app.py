@@ -160,10 +160,6 @@ if uploaded_file is not None:
     # Sidebar for column selection and processing options
     st.sidebar.header("Processing Options")
     primary_column = st.sidebar.selectbox("Select primary column:", df.columns)
-     
-    # Display selected column data
-    st.write(f"Data for selected column ({primary_column}):")
-    st.write(df[[primary_column]].dropna().head(10)) 
     
     # Text processing options
     text_processing = st.sidebar.expander("Text Processing Options")
@@ -196,6 +192,25 @@ if uploaded_file is not None:
         normalized_column_name = f"normalized_{working_column}"
         df[normalized_column_name] = df[working_column].apply(enhanced_normalize_text)
         working_column = normalized_column_name
+        
+     # Create columns for displaying results
+    col1, col2 = st.columns(2)
+
+    with col1:
+        # Display selected column data
+        st.write(f"### Data for selected column:")
+        st.dataframe(df[[primary_column]].dropna().head(10), use_container_width=True)
+
+    with col2:
+        if combine_columns and new_column_name in df.columns:
+            st.write(f"### Combined Column:")
+            st.dataframe(df[[new_column_name]].dropna().head(10), use_container_width=True)
+            # Display normalized data if normalization is applied
+    
+     # Display the combined column data if it was created
+    if normalize_text:
+        st.write(f"### Data for normalized column:")
+        st.dataframe(df[[normalized_column_name]].dropna().head(10), use_container_width=True)
     
     # Apply sentiment analysis if selected
     if analyze_sentiment:
