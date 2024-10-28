@@ -137,7 +137,7 @@ def label_disaster_sentiment(text):
     else:
         return 0
 
-st.title("Disaster Data Processor")
+st.title("Disaster Data Processor Pipeline")
 
 # File uploader widget
 uploaded_file = st.file_uploader("Upload your CSV file", type=["csv"])
@@ -153,6 +153,10 @@ if uploaded_file is not None:
     # Sidebar for column selection and processing options
     st.sidebar.header("Processing Options")
     primary_column = st.sidebar.selectbox("Select primary column:", df.columns)
+     
+    # Display selected column data
+    st.write(f"Data for selected column ({primary_column}):")
+    st.write(df[[primary_column]].dropna().head(10)) 
     
     # Text processing options
     text_processing = st.sidebar.expander("Text Processing Options")
