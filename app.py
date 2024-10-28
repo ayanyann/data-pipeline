@@ -4,6 +4,13 @@ import unicodedata
 import re
 from textblob import TextBlob
 
+
+# Set page title and favicon
+st.set_page_config(
+    page_title="Disaster Data Processor", 
+    page_icon="🌪️" 
+)
+
 def enhanced_normalize_text(text):
     
     if pd.isna(text):
